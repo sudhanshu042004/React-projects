@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { MdDelete } from "react-icons/md";
 
 
 class ClassInput extends Component{
@@ -11,6 +12,7 @@ class ClassInput extends Component{
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleClick = this.handleClick.bind(this);
+        this.handleDelete = this.handleDelete.bind(this);
     }
 
     handleChange (e) {
@@ -28,6 +30,11 @@ class ClassInput extends Component{
         })
         )
     }
+    handleDelete (index) {
+        this.setState((state) =>({
+            task: state.task.filter((task,i) => i !== index),
+        }) );
+    }
 
 
     render(){
@@ -42,7 +49,9 @@ class ClassInput extends Component{
                 <button  onClick={this.handleClick}>submit</button>
                 <ul>
                     {this.state.task.map((task, index) => (
-                        <li key={index}>{task} <button>-</button> </li>
+                        <li key={index}>{task} {" "} <button className="dlt" onClick={()=> this.handleDelete(index)} >
+                            <MdDelete />
+                            </button> </li>
                     )) }
                 </ul>
 
